@@ -1,27 +1,18 @@
 <template>
   <div class="login-container">
-    <!-- <Form ref="form" :model="form" label-width="80px" class="login-form">
-      <h2 class="login-title">管理系统</h2>
-      用户名:
-        <Input  v-model="form.username"></Input>
-      密码:
-        <Input  v-model="form.password"></Input>
-        <Button type="primary" @click="onSubmit">登录</Button>
-      
-    </Form> -->
-    <Form ref="formInline" :model="formInline" :rules="ruleInline" inline class="login-form">
-      <Form-item prop="user">
+    <Form ref="form" :model="form" :rules="rules" inline class="login-form">
+      <Form-item prop="username">
         <Input type="text" v-model="form.username" placeholder="Username">
-          <Icon type="ios-person-outline" slot="prepend"></Icon>
+          <Icon type="ios-person" slot="prepend"></Icon>
         </Input>
       </Form-item>
       <Form-item prop="password">
         <Input type="password" v-model="form.password" placeholder="Password">
-          <Icon type="ios-locked-outline" slot="prepend"></Icon>
+            <Icon type="ios-locked" slot="prepend"></Icon>
         </Input>
       </Form-item>
       <Form-item>
-        <Button type="primary" @click="onSubmit('formInline')">登录</Button>
+        <Button type="primary" @click="onSubmit('form')">登录</Button>
       </Form-item>
     </Form>
   </div>
@@ -60,6 +51,16 @@ export default {
         username: "",
         password: "",
       },
+      rules: {
+           username: [
+             {required: true, message: "用户名不能为空", trigger: 'blur'},
+             {min: 3, max: 10, message: "用户名3-5位", trigger: 'blur'}
+           ],
+           password: [
+             {required: true, message: "密码不能为空", trigger: 'blur'},
+             {min: 3, max: 10, message: "密码3-5位", trigger: 'blur'}
+           ]
+       }
     };
   },
   methods: {
